@@ -9,7 +9,6 @@ async def get_employees():
     
     if connection is None:
         raise HTTPException(status_code=500, detail="No se pudo conectar a la base de datos")
-
     try:
         cursor = connection.cursor(dictionary=True)  # Devuelve los resultados como JSON
         cursor.execute("SELECT * FROM employee")
