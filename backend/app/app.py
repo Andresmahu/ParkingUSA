@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from database.db import get_db_connection
+from api.login.routes.loginRoute import router as login_router
+
 
 # Inicializar la aplicación FastAPI
 app = FastAPI()
@@ -8,10 +10,8 @@ app = FastAPI()
 def read_root():
     return {"message": "¡Hola, FastAPI!"}
 
-# Endpoint de ejemplo
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+# Rutas del login
+app.include_router(login_router, prefix="/login", tags=["Login"])
 
 # Ruta para testear la conexión a la base de datos
 @app.get("/test-db")
